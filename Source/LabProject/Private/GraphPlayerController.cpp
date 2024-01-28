@@ -3,8 +3,6 @@
 
 #include "GraphPlayerController.h"
 
-#include "InputState.h"
-
 AGraphPlayerController::AGraphPlayerController()
 {
 	bShowMouseCursor = true;
