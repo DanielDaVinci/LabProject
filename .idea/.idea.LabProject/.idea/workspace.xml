@@ -9,11 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="488e4e97-3e7b-485c-809d-afc568915bce" name="Changes" comment="Fix bug with velocity and add corrections">
+    <list default="true" id="488e4e97-3e7b-485c-809d-afc568915bce" name="Changes" comment="Fix microbugs">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LabProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LabProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/FirstMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/FirstMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LabProject/Private/GraphPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Private/GraphPawn.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LabProject/Private/LabProjectGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Private/LabProjectGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP_GraphPawn.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_GraphPawn.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP_GraphPlayerController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_GraphPlayerController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP_LabProjectGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_LabProjectGameMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP_SkyBox.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_SkyBox.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/M_Cube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/M_Cube.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/M_Sphere.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/M_Sphere.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/SM_Cube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SM_Cube.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/SM_Sphere.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SM_Sphere.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LabProject/Private/GameHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Private/GameHUD.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +35,10 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://2" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GameHUD.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GraphPawn.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GraphPlayerController.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GraphPlayerController.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -44,7 +53,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C++ Project.LabProject.executor": "Run",
+    "C++ Project.LabProject.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -173,7 +182,7 @@
       <updated>1706298561483</updated>
       <workItem from="1706298562664" duration="893000" />
       <workItem from="1706299485757" duration="41991000" />
-      <workItem from="1706447581773" duration="36447000" />
+      <workItem from="1706447581773" duration="38165000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed error">
       <option name="closed" value="true" />
@@ -191,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706645732121</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fix microbugs">
+      <option name="closed" value="true" />
+      <created>1706649083068</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706649083068</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +230,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Fixed error" />
     <MESSAGE value="Fix bug with velocity and add corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug with velocity and add corrections" />
+    <MESSAGE value="Fix microbugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix microbugs" />
   </component>
 </project>

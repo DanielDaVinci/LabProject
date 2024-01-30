@@ -106,8 +106,8 @@ void AGameHUD::DrawGraph()
 				continue;
 
 			GetWorld()->LineBatcher->DrawLine(
-				m_graph->GetActorLocation() + nodes[i / 10][i % 10],
-				m_graph->GetActorLocation() + nodes[j / 10][j % 10],
+				m_graph->GetActorLocation() + nodes[i / nodes[0].Num()][i % nodes[0].Num()],
+				m_graph->GetActorLocation() + nodes[j / nodes[0].Num()][j % nodes[0].Num()],
 				FColor::White,
 				SDPG_World,
 				3.0f);
