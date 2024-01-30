@@ -308,9 +308,12 @@ TArray<Chaos::Pair<int32, int32>> AGraphPawn::FindPath(Chaos::Pair<int32, int32>
 			visited.Push(j);
 
 			float graphLength = std::get<1>(vertices[i]) + FVector::Distance(
-				m_nodes[i / 10][i % 10], m_nodes[j / 10][j % 10]);
-			float euclideLength = FVector::Distance(m_nodes[j / 10][j % 10],
-			                                        m_nodes[EndPosition.First][EndPosition.Second]);
+				m_nodes[i / parameters.graphPointsCountX][i % parameters.graphPointsCountX],
+				m_nodes[j / parameters.graphPointsCountX][j % parameters.graphPointsCountX]);
+			
+			float euclideLength = FVector::Distance(
+				m_nodes[j / parameters.graphPointsCountX][j % parameters.graphPointsCountX],
+				m_nodes[EndPosition.First][EndPosition.Second]);
 
 			vertices[j] = std::tuple(visited, graphLength, euclideLength);
 			priorityQueue.Push(j);
@@ -329,7 +332,9 @@ TArray<Chaos::Pair<int32, int32>> AGraphPawn::FindPath(Chaos::Pair<int32, int32>
 	TArray<Chaos::Pair<int32, int32>> result;
 	for (auto index : std::get<0>(vertices[priorityQueue.Last()]))
 	{
-		result.Add(Chaos::Pair(index / 10, index % 10));
+		result.Add(Chaos::Pair(
+			index / parameters.graphPointsCountX,
+			index % parameters.graphPointsCountX));
 	}
 
 	return result;
