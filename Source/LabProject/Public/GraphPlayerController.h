@@ -8,6 +8,7 @@
 
 DECLARE_DELEGATE_OneParam(FOnMouseDownSignature, FVector2D);
 DECLARE_DELEGATE_OneParam(FOnMousePressedMoveSignature, FVector2D);
+DECLARE_DELEGATE_OneParam(FOnMouseWheelSignature, float);
 
 UCLASS()
 class LABPROJECT_API AGraphPlayerController : public APlayerController
@@ -19,6 +20,7 @@ public:
 	
 	FOnMouseDownSignature OnMouseDown;
 	FOnMousePressedMoveSignature OnMousePressedMove;
+	FOnMouseWheelSignature OnMouseWheel;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="MouseInput")
@@ -28,6 +30,8 @@ protected:
 
 	void OnMouseLeftPressed();
 	void OnMouseLeftReleased();
+
+	void OnMouseWheelAxis(float Amount);
 	
 private:
 	FTimerHandle m_mouseMoveTimer;

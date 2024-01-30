@@ -14,15 +14,17 @@ void AGraphPlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("LeftMouse", IE_Pressed, this, &AGraphPlayerController::OnMouseLeftPressed);
 	InputComponent->BindAction("LeftMouse", IE_Released, this, &AGraphPlayerController::OnMouseLeftReleased);
+
+	InputComponent->BindAxis("WheelMouse", this, &AGraphPlayerController::OnMouseWheelAxis);
 }
 
 void AGraphPlayerController::OnMouseLeftPressed()
 {
 	FVector2D mousePosition;
 	GetMousePosition(mousePosition.X, mousePosition.Y);
-	
+
 	OnMouseDown.ExecuteIfBound(mousePosition);
-	
+
 	if (!GetWorld())
 		return;
 
@@ -38,10 +40,15 @@ void AGraphPlayerController::OnMouseLeftReleased()
 	GetWorld()->GetTimerManager().ClearTimer(m_mouseMoveTimer);
 }
 
+void AGraphPlayerController::OnMouseWheelAxis(float Amount)
+{
+	OnMouseWheel.ExecuteIfBound(Amount);
+}
+
 void AGraphPlayerController::OnMouseMoveTimerUpdate()
 {
 	static FVector2D prevMousePosition = {};
-	
+
 	FVector2D mousePosition;
 	GetMousePosition(mousePosition.X, mousePosition.Y);
 

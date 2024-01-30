@@ -7,9 +7,7 @@
 #include "GameHUD.generated.h"
 
 class AGraphPawn;
-/**
- * 
- */
+
 UCLASS()
 class LABPROJECT_API AGameHUD : public AHUD
 {

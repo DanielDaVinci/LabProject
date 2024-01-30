@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "CoreTypes.h"
 #include "GraphPawn.generated.h"
 
 class AGraphNode;
@@ -28,8 +29,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Components", DisplayName="CameraComponent")
 	UCameraComponent* pCameraComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Components", DisplayName="Instanced Static Mesh Component")
-	UInstancedStaticMeshComponent* pInstancedStaticMeshComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Components", DisplayName="Instanced Static Mesh Ojects Component")
+	UInstancedStaticMeshComponent* pInstancedStaticMeshObjectsComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Components", DisplayName="Instanced Static Mesh Nodes Component")
+	UInstancedStaticMeshComponent* pInstancedStaticMeshNodesComponent;
 	
 	virtual void BeginPlay() override;
 	
@@ -38,12 +42,13 @@ public:
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Camera")
-	float cameraSensitivity = 1.0f;
+	FCameraSensitivity cameraSensitivity;
 	
 	void InputBind();
 
 	void OnMouseDown(FVector2D MousePosition);
 	void OnMouseMove(FVector2D MousePosition);
+	void OnMouseWheel(float Amount);
 
 	void MouseInputRotate(float DeltaTime) const;
 	
@@ -58,13 +63,7 @@ public:
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")
-	int32 graphPointsCountX = 10;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")
-	int32 graphPointsCountY = 10;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")
-	float graphStep = 10.0f;
+	FGraphParameters parameters;
 
 	void InitGraph();
 	
