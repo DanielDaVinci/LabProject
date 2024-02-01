@@ -83,13 +83,13 @@ public:
 	TArray<FVector> GetCurrentLocations() const;
 	
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph", meta=(ClampMin="1"))
 	int32 objectCount = 3;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")
 	TArray<FColor> objectColors = {FColor::Red, FColor::Green, FColor::Blue};
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph", meta=(ClampMin="1.0"))
 	float objectVelocity = 1.0f;
 
 	void InitObjects();

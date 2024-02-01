@@ -9,12 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="488e4e97-3e7b-485c-809d-afc568915bce" name="Changes" comment="Fix microbugs">
+    <list default="true" id="488e4e97-3e7b-485c-809d-afc568915bce" name="Changes" comment="Fix bugs #3">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LabProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LabProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP_GraphPawn.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_GraphPawn.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LabProject/Private/GameHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Private/GameHUD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LabProject/Private/GraphPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Private/GraphPawn.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LabProject/Public/CoreTypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Public/CoreTypes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LabProject/Public/GraphPawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Public/GraphPawn.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,6 +184,7 @@
       <workItem from="1706447581773" duration="38165000" />
       <workItem from="1706706478284" duration="4046000" />
       <workItem from="1706715450051" duration="514000" />
+      <workItem from="1706747511574" duration="470000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed error">
       <option name="closed" value="true" />
@@ -211,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706649083068</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix bugs #3">
+      <option name="closed" value="true" />
+      <created>1706747848060</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706747848060</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,6 +241,7 @@
     <MESSAGE value="Fixed error" />
     <MESSAGE value="Fix bug with velocity and add corrections" />
     <MESSAGE value="Fix microbugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix microbugs" />
+    <MESSAGE value="Fix bugs #3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs #3" />
   </component>
 </project>

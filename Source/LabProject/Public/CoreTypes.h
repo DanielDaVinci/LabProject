@@ -3,8 +3,6 @@
 #include "CoreMinimal.h"
 #include "CoreTypes.generated.h"
 
-
-
 USTRUCT(BlueprintType)
 struct FGraphParameters
 {
