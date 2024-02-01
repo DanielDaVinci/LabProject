@@ -12,14 +12,9 @@
     <list default="true" id="488e4e97-3e7b-485c-809d-afc568915bce" name="Changes" comment="Fix microbugs">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LabProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LabProject/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP_GraphPawn.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_GraphPawn.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP_GraphPlayerController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_GraphPlayerController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP_LabProjectGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_LabProjectGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP_SkyBox.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_SkyBox.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/M_Cube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/M_Cube.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/M_Sphere.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/M_Sphere.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SM_Cube.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SM_Cube.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SM_Sphere.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SM_Sphere.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/LabProject/Private/GameHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Private/GameHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LabProject/Private/GraphPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Private/GraphPawn.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/LabProject/Public/CoreTypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LabProject/Public/CoreTypes.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,10 +32,15 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GameHUD.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GraphPawn.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GraphPlayerController.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Demos/Documents/Unreal Projects/LabProject/Source/LabProject/Private/GraphPlayerController.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -51,28 +51,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C++ Project.LabProject.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C++ Project.LabProject.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Demos\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Demos\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\Demos\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Demos\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Demos\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Demos\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C++ Project.LabProject">
     <configuration name="LabProject" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -183,6 +184,8 @@
       <workItem from="1706298562664" duration="893000" />
       <workItem from="1706299485757" duration="41991000" />
       <workItem from="1706447581773" duration="38165000" />
+      <workItem from="1706706478284" duration="4046000" />
+      <workItem from="1706715450051" duration="514000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed error">
       <option name="closed" value="true" />

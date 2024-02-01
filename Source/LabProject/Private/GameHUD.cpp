@@ -44,39 +44,35 @@ void AGameHUD::DrawGraph()
 
 	const float arrowSize = 100.0f;
 
-	for (int i = 0; i < objectPaths.Num(); i++)
+	for (int32 i = 0; i < objectPaths.Num(); i++)
 	{
-		bool beforeObjectPosition = true;
-		for (int j = 0; j < objectPaths[i].Num() - 1; j++)
+		int32 startJ = objectPaths[i].Find(currentPositions[i]);
+		if (startJ == INDEX_NONE)
+			continue;
+		
+		for (int32 j = startJ; j < objectPaths[i].Num() - 1; j++)
 		{
-			if (objectPaths[i][j] != currentPositions[i] && beforeObjectPosition)
+			int32 y = objectPaths[i][j].First * nodes[0].Num() + objectPaths[i][j].Second;
+			int32 x = objectPaths[i][j + 1].First * nodes[0].Num() + objectPaths[i][j + 1].Second;
+
+			if (adjTable[y][x] == 0)
+				continue;
+			
+			if (objectPaths[i][j] == currentPositions[i])
 			{
-				GetWorld()->LineBatcher->DrawDirectionalArrow(
-					m_graph->GetActorLocation() + nodes[objectPaths[i][j].First][objectPaths[i][j].Second],
-					m_graph->GetActorLocation() + nodes[objectPaths[i][j + 1].First][objectPaths[i][j + 1].Second],
-					arrowSize,
-					objectColors[i % objectColors.Num()],
-					0,
+				GetWorld()->LineBatcher->DrawLine(
+					m_graph->GetActorLocation() + nodes[currentPositions[i].First][currentPositions[i].Second],
+					m_graph->GetActorLocation() + currentLocations[i],
+					FColor::White,
 					SDPG_World,
 					3.0f);
-			}
-			else if (objectPaths[i][j] == currentPositions[i])
-			{
-				beforeObjectPosition = false;
 				
 				GetWorld()->LineBatcher->DrawDirectionalArrow(
 					m_graph->GetActorLocation() + currentLocations[i],
 					m_graph->GetActorLocation() + nodes[objectPaths[i][j + 1].First][objectPaths[i][j + 1].Second],
 					arrowSize,
-					FColor::White,
-					0,
-					SDPG_World,
-					3.0f);
-
-				GetWorld()->LineBatcher->DrawLine(
-					m_graph->GetActorLocation() + nodes[currentPositions[i].First][currentPositions[i].Second],
-					m_graph->GetActorLocation() + currentLocations[i],
 					objectColors[i % objectColors.Num()],
+					0,
 					SDPG_World,
 					3.0f);
 			}
@@ -86,14 +82,12 @@ void AGameHUD::DrawGraph()
 					m_graph->GetActorLocation() + nodes[objectPaths[i][j].First][objectPaths[i][j].Second],
 					m_graph->GetActorLocation() + nodes[objectPaths[i][j + 1].First][objectPaths[i][j + 1].Second],
 					arrowSize,
-					FColor::White,
+					objectColors[i % objectColors.Num()],
 					0,
 					SDPG_World,
 					3.0f);
 			}
-
-			int32 y = objectPaths[i][j].First * nodes[i].Num() + objectPaths[i][j].Second;
-			int32 x = objectPaths[i][j + 1].First * nodes[i].Num() + objectPaths[i][j + 1].Second;
+			
 			adjTable[y][x] = adjTable[x][y] = 0;
 		}
 	}

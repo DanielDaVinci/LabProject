@@ -33,6 +33,8 @@ void AGraphPawn::BeginPlay()
 {
 	Super::BeginPlay();
 
+	m_startCameraRotation = pSpringArmComponent->GetRelativeRotation();
+
 	InputBind();
 	InitGraph();
 }
@@ -74,7 +76,7 @@ void AGraphPawn::OnMouseWheel(float Amount)
 	float newLength = FMath::Clamp(
 		pSpringArmComponent->TargetArmLength - Amount * cameraSensitivity.mouseWheelSensitivity,
 		0,
-		FMath::Max(parameters.graphPointsCountX, parameters.graphPointsCountY) * (parameters.graphStep + 1));
+		(FMath::Max(parameters.graphPointsCountX, parameters.graphPointsCountY) * 1.5f) * parameters.graphStep);
 
 	pSpringArmComponent->TargetArmLength = newLength;
 }
