@@ -28,13 +28,13 @@ void AGameHUD::BindGraphPawn()
 	m_graph = Cast<AGraphPawn>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
-void AGameHUD::DrawGraph()
+void AGameHUD::DrawGraph() const
 {
 	if (!m_graph)
 		return;
 
 	const auto& nodes = m_graph->GetNodes();
-	auto adjTable = m_graph->GetAdjTable();
+	auto mapAdjTable = m_graph->GetMapAdjTable();
 
 	const auto& objectColors = m_graph->GetObjectColors();
 
@@ -42,11 +42,11 @@ void AGameHUD::DrawGraph()
 	const auto& currentLocations = m_graph->GetCurrentLocations();
 	const auto& objectPaths = m_graph->GetPaths();
 
-	const float arrowSize = 100.0f;
+	const float arrowSize = 100.0f * m_graph->GetScale();
 
 	for (int32 i = 0; i < objectPaths.Num(); i++)
 	{
-		int32 startJ = objectPaths[i].Find(currentPositions[i]);
+		const int32 startJ = objectPaths[i].Find(currentPositions[i]);
 		if (startJ == INDEX_NONE)
 			continue;
 		
@@ -54,8 +54,8 @@ void AGameHUD::DrawGraph()
 		{
 			int32 y = objectPaths[i][j].First * nodes[0].Num() + objectPaths[i][j].Second;
 			int32 x = objectPaths[i][j + 1].First * nodes[0].Num() + objectPaths[i][j + 1].Second;
-
-			if (adjTable[y][x] == 0)
+	
+			if (!mapAdjTable[y].Contains(x))
 				continue;
 			
 			if (objectPaths[i][j] == currentPositions[i])
@@ -65,7 +65,7 @@ void AGameHUD::DrawGraph()
 					m_graph->GetActorLocation() + currentLocations[i],
 					FColor::White,
 					SDPG_World,
-					3.0f);
+					3.0f * m_graph->GetScale());
 				
 				GetWorld()->LineBatcher->DrawDirectionalArrow(
 					m_graph->GetActorLocation() + currentLocations[i],
@@ -74,7 +74,7 @@ void AGameHUD::DrawGraph()
 					objectColors[i % objectColors.Num()],
 					0,
 					SDPG_World,
-					3.0f);
+					3.0f * m_graph->GetScale());
 			}
 			else
 			{
@@ -85,26 +85,24 @@ void AGameHUD::DrawGraph()
 					objectColors[i % objectColors.Num()],
 					0,
 					SDPG_World,
-					3.0f);
+					3.0f * m_graph->GetScale());
 			}
 			
-			adjTable[y][x] = adjTable[x][y] = 0;
+			mapAdjTable[y].Remove(x);
+			mapAdjTable[x].Remove(y);
 		}
 	}
-
-	for (int32 i = 0; i < adjTable.Num(); i++)
+	
+	for (const auto& [i, values]: mapAdjTable)
 	{
-		for (int32 j = i + 1; j < adjTable[i].Num(); j++)
+		for (const auto& j: values)
 		{
-			if (adjTable[i][j] == 0)
-				continue;
-
 			GetWorld()->LineBatcher->DrawLine(
 				m_graph->GetActorLocation() + nodes[i / nodes[0].Num()][i % nodes[0].Num()],
 				m_graph->GetActorLocation() + nodes[j / nodes[0].Num()][j % nodes[0].Num()],
 				FColor::White,
 				SDPG_World,
-				3.0f);
+				3.0f * m_graph->GetScale());
 		}
 	}
 }

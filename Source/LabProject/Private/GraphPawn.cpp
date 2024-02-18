@@ -73,7 +73,7 @@ void AGraphPawn::OnMouseMove(FVector2D MousePosition)
 
 void AGraphPawn::OnMouseWheel(float Amount)
 {
-	float newLength = FMath::Clamp(
+	const float newLength = FMath::Clamp(
 		pSpringArmComponent->TargetArmLength - Amount * cameraSensitivity.mouseWheelSensitivity,
 		0,
 		(FMath::Max(parameters.graphPointsCountX, parameters.graphPointsCountY) * 1.5f) * parameters.graphStep);
@@ -110,7 +110,7 @@ void AGraphPawn::InitNodes()
 	exp.Init(FVector::ZeroVector, parameters.graphPointsCountX);
 	m_nodes.Init(exp, parameters.graphPointsCountY);
 
-	FVector centerOffset(
+	const FVector centerOffset(
 		-1 * parameters.graphPointsCountX * parameters.graphStep / 2.0f,
 		-1 * parameters.graphPointsCountY * parameters.graphStep / 2.0f,
 		0.0f);
@@ -127,7 +127,10 @@ void AGraphPawn::InitNodes()
 
 			m_nodes[i][j] = centerOffset + FVector(j * parameters.graphStep, i * parameters.graphStep, 0.0f) + offset;
 
-			pInstancedStaticMeshNodesComponent->AddInstance(FTransform(m_nodes[i][j]));
+			FTransform instanceTransform;
+			instanceTransform.SetLocation(m_nodes[i][j]);
+			instanceTransform.SetScale3D(FVector::OneVector * GetScale());
+			pInstancedStaticMeshNodesComponent->AddInstance(instanceTransform);
 		}
 	}
 }
@@ -138,14 +141,12 @@ void AGraphPawn::InitAdjTable()
 	
 	TArray<int32> visitedVertices;
 	visitedVertices.Init(0, verticesAmount);
-	
-	m_adjTable.Init(visitedVertices, verticesAmount);
 
 	TArray<Chaos::Pair<int32, int32>> queueVertices = {{0, 0}};
 	
 	while (queueVertices.Num() != 0 && verticesAmount != 0)
 	{
-		Chaos::Pair<int32, int32> currentPosition = queueVertices.Last();
+		const Chaos::Pair<int32, int32> currentPosition = queueVertices.Last();
 		
 		int32 y = currentPosition.First * parameters.graphPointsCountX + currentPosition.Second;
 		visitedVertices[y] = 1;
@@ -173,7 +174,9 @@ void AGraphPawn::InitAdjTable()
 		}
 
 		int32 x = possiblePaths[FMath::RandRange(0, possiblePaths.Num() - 1)];
-		m_adjTable[y][x] = m_adjTable[x][y] = 1;
+
+		m_mapAdjTable.FindOrAdd(y).Add(x);
+		m_mapAdjTable.FindOrAdd(x).Add(y);
 
 		queueVertices.Push({x / parameters.graphPointsCountX, x % parameters.graphPointsCountX});
 		verticesAmount -= 1;
@@ -189,18 +192,20 @@ void AGraphPawn::InitAdjTable()
 			{
 				int32 x = (i + 1) * parameters.graphPointsCountX + j;
 				
-				if (m_adjTable[y][x] == 0)
+				if (!m_mapAdjTable[y].Contains(x) && FMath::RandRange(0, 1))
 				{
-					m_adjTable[y][x] = m_adjTable[x][y] = FMath::RandRange(0, 1);
+					m_mapAdjTable[y].Add(x);
+					m_mapAdjTable[x].Add(y);
 				}
 			}
 			if (j + 1 < parameters.graphPointsCountX)
 			{
 				int32 x = i * parameters.graphPointsCountX + j + 1;
 
-				if (m_adjTable[y][x] == 0)
+				if (!m_mapAdjTable[y].Contains(x) && FMath::RandRange(0, 1))
 				{
-					m_adjTable[y][x] = m_adjTable[x][y] = FMath::RandRange(0, 1);
+					m_mapAdjTable[y].Add(x);
+					m_mapAdjTable[x].Add(y);
 				}
 			}
 		}
@@ -231,7 +236,10 @@ void AGraphPawn::InitObjects()
 
 		FVector position = m_nodes[m_currentPositions[i].First][m_currentPositions[i].Second];
 
-		pInstancedStaticMeshObjectsComponent->AddInstance(FTransform(position));
+		FTransform instanceTransform;
+		instanceTransform.SetLocation(position);
+		instanceTransform.SetScale3D(FVector::OneVector * GetScale());
+		pInstancedStaticMeshObjectsComponent->AddInstance(instanceTransform);
 		pInstancedStaticMeshObjectsComponent->SetCustomDataValue(i, 0, objectColors[i % objectColors.Num()].R);
 		pInstancedStaticMeshObjectsComponent->SetCustomDataValue(i, 1, objectColors[i % objectColors.Num()].G);
 		pInstancedStaticMeshObjectsComponent->SetCustomDataValue(i, 2, objectColors[i % objectColors.Num()].B);
@@ -242,11 +250,11 @@ void AGraphPawn::InitPaths()
 {
 	for (int32 i = 0; i < objectCount; i++)
 	{
-		Chaos::Pair<int32, int32> newEndPosititon = Chaos::Pair(
+		const Chaos::Pair<int32, int32> newEndPosition = Chaos::Pair(
 			FMath::RandRange(0, parameters.graphPointsCountY - 1),
 			FMath::RandRange(0, parameters.graphPointsCountX - 1));
 		
-		m_objectPaths.Add(FindPath(m_currentPositions[i], newEndPosititon));
+		m_objectPaths.Add(FindPath(m_currentPositions[i], newEndPosition));
 	}
 }
 
@@ -257,14 +265,14 @@ void AGraphPawn::MoveObjects(float DeltaTime)
 		FTransform transform;
 		pInstancedStaticMeshObjectsComponent->GetInstanceTransform(i, transform);
 
-		int32 targetIndex = m_objectPaths[i].Find(m_currentPositions[i]) + 1;
+		const int32 targetIndex = m_objectPaths[i].Find(m_currentPositions[i]) + 1;
 		if (targetIndex == -1 || targetIndex >= m_objectPaths[i].Num())
 		{
-			Chaos::Pair<int32, int32> newEndPosititon = Chaos::Pair(
+			const Chaos::Pair<int32, int32> newEndPosition = Chaos::Pair(
 			FMath::RandRange(0, parameters.graphPointsCountY - 1),
 			FMath::RandRange(0, parameters.graphPointsCountX - 1));
 			
-			m_objectPaths[i] = FindPath(m_currentPositions[i], newEndPosititon);
+			m_objectPaths[i] = FindPath(m_currentPositions[i], newEndPosition);
 			continue;
 		}
 
@@ -287,8 +295,10 @@ void AGraphPawn::MoveObjects(float DeltaTime)
 TArray<Chaos::Pair<int32, int32>> AGraphPawn::FindPath(Chaos::Pair<int32, int32> StartPosition,
                                                        Chaos::Pair<int32, int32> EndPosition)
 {
+	const int32 nodesAmount = parameters.graphPointsCountX * parameters.graphPointsCountY;
+	
 	TArray<std::tuple<TArray<int32>, float, float>> vertices;
-	vertices.Init(std::tuple(TArray<int32>(), MAX_flt, MAX_flt), m_adjTable.Num());
+	vertices.Init(std::tuple(TArray<int32>(), MAX_flt, MAX_flt), nodesAmount);
 
 	int32 currentPosition = StartPosition.First * parameters.graphPointsCountX + StartPosition.Second;
 	const int32 targetPosition = EndPosition.First * parameters.graphPointsCountX + EndPosition.Second;
@@ -301,9 +311,9 @@ TArray<Chaos::Pair<int32, int32>> AGraphPawn::FindPath(Chaos::Pair<int32, int32>
 		int32 i = priorityQueue.Pop();
 
 		TArray<int32> newVertices;
-		for (int j = 0; j < m_adjTable[i].Num(); j++)
+		for (int j = 0; j < nodesAmount; j++)
 		{
-			if (m_adjTable[i][j] == 0 || std::get<0>(vertices[j]).Num() != 0)
+			if (!m_mapAdjTable[i].Contains(j) || std::get<0>(vertices[j]).Num() != 0)
 				continue;
 
 			TArray<int32> visited = std::get<0>(vertices[i]);
@@ -332,7 +342,7 @@ TArray<Chaos::Pair<int32, int32>> AGraphPawn::FindPath(Chaos::Pair<int32, int32>
 		return TArray<Chaos::Pair<int32, int32>>();
 
 	TArray<Chaos::Pair<int32, int32>> result;
-	for (auto index : std::get<0>(vertices[priorityQueue.Last()]))
+	for (const auto& index : std::get<0>(vertices[priorityQueue.Last()]))
 	{
 		result.Add(Chaos::Pair(
 			index / parameters.graphPointsCountX,

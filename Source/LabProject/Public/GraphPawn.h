@@ -58,9 +58,9 @@ private:
 	FRotator m_startCameraRotation;
 
 public:
-	TArray<TArray<FVector>>& GetNodes() { return m_nodes; }
-	TArray<TArray<int32>>& GetAdjTable() { return m_adjTable; }
-	
+	float GetScale() const { return parameters.graphStep / 100.0f; }
+	const TArray<TArray<FVector>>& GetNodes() { return m_nodes; }
+	const TMap<int32, TSet<int32>>& GetMapAdjTable() { return m_mapAdjTable; }
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")
 	FGraphParameters parameters;
@@ -72,18 +72,18 @@ protected:
 
 private:
 	TArray<TArray<FVector>> m_nodes;
-	TArray<TArray<int32>> m_adjTable;
+	TMap<int32, TSet<int32>> m_mapAdjTable;
 
 public:
-	TArray<FColor>& GetObjectColors() { return objectColors; }
+	const TArray<FColor>& GetObjectColors() { return objectColors; }
 	
-	TArray<Chaos::Pair<int32, int32>>& GetCurrentPositions() { return m_currentPositions; }
-	TArray<TArray<Chaos::Pair<int32, int32>>>& GetPaths() { return m_objectPaths; }
+	const TArray<Chaos::Pair<int32, int32>>& GetCurrentPositions() { return m_currentPositions; }
+	const TArray<TArray<Chaos::Pair<int32, int32>>>& GetPaths() { return m_objectPaths; }
 
 	TArray<FVector> GetCurrentLocations() const;
 	
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph", meta=(ClampMin="1"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph", meta=(ClampMin="0"))
 	int32 objectCount = 3;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Graph")

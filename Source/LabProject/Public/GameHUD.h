@@ -23,5 +23,5 @@ private:
 	AGraphPawn* m_graph;
 
 	void BindGraphPawn();
-	void DrawGraph();
+	void DrawGraph() const;
 };
